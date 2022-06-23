@@ -1,0 +1,14 @@
+version: "2"
+services:
+  app:
+    build: ./pyapp
+    ports:
+      - "5001:5000"
+    restart: always  
+  db:
+    build: ./sql
+    ports:
+      - "3308:3306"
+    env_file:
+      - production.env
+    restart: always  
