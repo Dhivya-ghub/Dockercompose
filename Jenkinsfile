@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-	    registry = "dhivyadhub/dockercompose" 
+        registry = "dhivyadhub/dockercompose" 
         registryCredential = 'dockerhub_id'    
     }
     stages {
