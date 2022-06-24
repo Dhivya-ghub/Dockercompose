@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
 
 			steps {
-				bat 'docker build -t dhivyadhub/dockercompose::$BUILD_NUMBER .'
+				sh 'docker build -t dhivyadhub/dockercompose::$BUILD_NUMBER .'
 			}
 		}
     }
