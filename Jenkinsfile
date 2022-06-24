@@ -12,7 +12,7 @@ pipeline {
                 git url: 'https://github.com/Dhivya-ghub/Dockercompose.git', branch: 'feature',
                  credentialsId: 'github_creds'
             }
-	}   
+	    }   
         stage('Build') {
 
 			steps {
@@ -34,5 +34,4 @@ pipeline {
 			}
 		}
 	}
-
-    }
+}
