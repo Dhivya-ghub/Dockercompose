@@ -13,27 +13,26 @@ pipeline {
                  credentialsId: 'github_creds'
             }
 	}   
-        stage('Building our image') { 
-            steps { 
-                script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                }
-            } 
-        }
-        stage('Deploy our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
-            }
-        } 
-        stage('Cleaning up') { 
-            steps {
+        stage('Build') {
 
-                bat "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        } 
+			steps {
+				bat 'docker build -t dhivyadhub/dockercompose:%BUILD_NUMBER% .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				bat 'docker push dhivyadhub/dockercompose:%BUILD_NUMBER%'
+			}
+		}
+	}
+
     }
- }
