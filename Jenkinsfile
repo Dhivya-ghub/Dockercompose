@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	registry = "dhivyadhub/dockercompose" 
+        registryCredential = 'dockerhub_id'  	
 	}
     stages {
         stage('git clone') {
@@ -14,7 +15,7 @@ pipeline {
         stage('Build') {
 
 			steps {
-				bat 'docker build -t dhivyadhub/dockercompose::%BUILD_NUMBER% .'
+				bat 'docker build -t dhivyadhub/dockercompose:%BUILD_NUMBER% .'
 			}
 		}
 
@@ -28,7 +29,7 @@ pipeline {
 		stage('Push') {
 
 			steps {
-				bat 'docker push dhivyadhub/dockercompose::%BUILD_NUMBER%'
+				bat 'docker push dhivyadhub/dockercompose:%BUILD_NUMBER%'
 			}
 		}
 	}
