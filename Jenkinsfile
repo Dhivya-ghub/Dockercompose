@@ -8,6 +8,6 @@ node {
                  credentialsId: 'github_creds'
     } 
     stage('docker-compose') {
-                 bat "docker-compose build && docker-compose up -d"
+                 sh "docker-compose build && docker-compose up -d"
     }    
 }
