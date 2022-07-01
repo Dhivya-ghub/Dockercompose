@@ -2,11 +2,13 @@ version: "2"
 services:
   app:
     build: ./pyapp
+    image: pythonapp:1
     ports:
       - "5001:5000"
     restart: always  
   db:
     build: ./sql
+    image: sqlapp:1
     ports:
       - "3308:3306"
     env_file:
