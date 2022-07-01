@@ -8,7 +8,7 @@ node {
     }
     stage('docker push') {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR')]) {
-                sh 'docker push dockerdhub/pythonapp:1'
+                sh 'docker push pythonapp:1'
                } 
     }     
     stage('docker-compose down') {
