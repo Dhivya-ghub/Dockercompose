@@ -7,7 +7,7 @@ node {
                  sh 'docker-compose build && docker-compose up -d'
     }
     stage('docker containers testing') {
-                 sh 'wget localhost:5001 && wget localhost:3308' 
+                 sh 'wget localhost:5001' 
     }   
     stage('docker images  push') {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR')]) {
