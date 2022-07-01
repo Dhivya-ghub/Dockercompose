@@ -5,6 +5,6 @@ ENV https_proxy http://host.docker.internal:3128
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
-RUN apk update && apk add bash
+RUN apt-get update && apt-get install -y python3 python3-pip
 EXPOSE 5000
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
