@@ -2,11 +2,10 @@ node {
     environment {
         registry = "dhivyadhub/dockercompose"     
     }
-    stage('git clone') {
-                // Get code from a GitHub repository
-                git url: 'https://github.com/Dhivya-ghub/Dockercompose.git', branch: 'feature',
-                 credentialsId: 'github_creds'
-    } 
+    stage ('Cleaning Local Images and Containers') {
+           steps {
+               sh 'docker stop $(docker ps -a -q) || true && docker rm $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true'
+           }
     stage('docker-compose') {
                  sh "docker-compose build && docker-compose up -d"
     }    
