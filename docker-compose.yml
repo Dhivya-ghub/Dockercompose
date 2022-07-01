@@ -2,13 +2,13 @@ version: "2"
 services:
   app:
     build: ./pyapp
-    image: pythonapp:1
+    image: pythonapp:dockerdhub/pythonapp
     ports:
       - "5001:5000"
     restart: always  
   db:
     build: ./sql
-    image: sqlapp:1
+    image: sqlapp:dockerdhub/pythonapp
     ports:
       - "3308:3306"
     env_file:
