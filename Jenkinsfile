@@ -11,7 +11,7 @@ node {
                  sh 'docker-compose build && docker-compose up -d'
     }
     stage('docker containers testing') {
-                 sh 'wget 35.92.234.110:5001' 
+                 sh 'wget 18.236.253.227:5001' 
     }   
     stage('docker images  push') {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
