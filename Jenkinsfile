@@ -1,10 +1,8 @@
 node {
      checkout scm 
      environment {
-        http_proxy = 'http://127.0.0.1:3128/'
-        https_proxy = 'http://127.0.0.1:3128/'
-        ftp_proxy = 'http://127.0.0.1:3128/'
-        socks_proxy = 'socks://127.0.0.1:3128/'
+        docker_repo = "dhivyadhub/pydocker1"
+        DOCKERHUB_CREDENTIALS = credentials('dockerHub')
      } 
     stage ('Cleaning Local Images and Containers') {
                  sh 'docker stop $(docker ps -a -q) || true && docker rm $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true'
@@ -13,11 +11,11 @@ node {
                  sh 'docker-compose build && docker-compose up -d'
     }
     stage('docker containers testing') {
-                 sh 'wget localhost:5001' 
+                 sh 'wget 35.92.234.110:5001' 
     }   
     stage('docker images  push') {
-         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR')]) {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker push dhivyadhub/pythonapp:1 && docker push dhivyadhub/sqlapp:1'
-               } 
+               
     }     
 }
